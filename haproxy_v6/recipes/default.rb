@@ -16,15 +16,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-
-bash 'GetUpdatedHaproxyextract_module' do
-  cwd ::File.dirname(src_filepath)
+bash 'GetUpdatedHaproxy' do
   code <<-EOH
     sudo add-apt-repository ppa:vbernat/haproxy-1.6
     sudo apt-get update
-    sudo apt-get install haproxy
     EOH
+end
+
+package 'haproxy' do
+  action :install
 end
 
 if platform?('debian','ubuntu')
